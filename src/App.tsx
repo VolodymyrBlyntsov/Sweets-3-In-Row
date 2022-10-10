@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { updateBoard } from './store'
 import { useAppDispatch, useAppSelector } from './store/hooks'
+import { createBoard } from './utils/createBoard'
 
 const App = () => {
 
@@ -11,7 +12,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(updateBoard(createBoard(boardSize)))
-  })
+  }, [boardSize, dispatch])
   
 
   return (
