@@ -3,6 +3,8 @@ import Board from './components/Board'
 import { updateBoard } from './store'
 import { useAppDispatch, useAppSelector } from './store/hooks'
 import { createBoard } from './utils/createBoard'
+import { formulaForColumnOfFour } from './utils/formulas'
+import { isColumnOfFour } from './utils/moveCheckLogic'
 
 const App = () => {
 
@@ -15,6 +17,14 @@ const App = () => {
     dispatch(updateBoard(createBoard(boardSize)))
   }, [boardSize, dispatch])
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const newBoard = [...board]
+      isColumnOfFour(newBoard, boardSize, formulaForColumnOfFour(boardSize))
+      dispatch(updateBoard(newBoard))
+    }, 150)
+    return () => clearTimeout(timeout)
+  }, [dispatch, board, boardSize])
 
   return (
     <div className="flex items-center justify-center h-screen">
