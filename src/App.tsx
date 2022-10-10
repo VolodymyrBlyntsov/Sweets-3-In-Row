@@ -4,7 +4,7 @@ import { updateBoard } from './store'
 import { useAppDispatch, useAppSelector } from './store/hooks'
 import { createBoard } from './utils/createBoard'
 import { formulaForColumnOfFour, formulaForColumnOfThree, generateInvalidMoves } from './utils/formulas'
-import { checkForRowOfFour, isColumnOfFour, isColumnOfThree } from './utils/moveCheckLogic'
+import { checkForRowOfFour, checkForRowOfThree, isColumnOfFour, isColumnOfThree } from './utils/moveCheckLogic'
 
 const App = () => {
 
@@ -23,6 +23,7 @@ const App = () => {
       isColumnOfFour(newBoard, boardSize, formulaForColumnOfFour(boardSize))
       isColumnOfThree(newBoard, boardSize, formulaForColumnOfThree(boardSize))
       checkForRowOfFour(newBoard, boardSize, generateInvalidMoves(boardSize, true))
+      checkForRowOfThree(newBoard, boardSize, generateInvalidMoves(boardSize, true))
       dispatch(updateBoard(newBoard))
     }, 150)
     return () => clearTimeout(timeout)
