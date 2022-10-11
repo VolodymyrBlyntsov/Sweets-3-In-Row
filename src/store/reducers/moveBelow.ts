@@ -1,13 +1,13 @@
 import { candies } from './../../utils/candyData';
-import { WritableDraft } from "immer/dist/internal";
+import { WritableDraft } from "immer/dist/types/types-external";
 import { formulaForMoveBelow } from "../../utils/formulas";
 
 export const moveBelowReducer = (
     state: WritableDraft<{
         board: string[];
         boardSize: number;
-        squareBeingReplaced: Element | undefined;
-        squareBeingDragged: Element | undefined;
+        //squareBeingReplaced: Element | undefined;
+        //squareBeingDragged: Element | undefined;
     }>
 ) => {
     const newBoard: string[] = [...state.board]
@@ -20,6 +20,7 @@ export const moveBelowReducer = (
         const firstRow = Array(boardSize)
             .fill(0)
             .map((_value: number, index: number) => index)
+
         const isFirstRow = firstRow.includes(i)
         
         if(isFirstRow && newBoard[i] === "") {
@@ -34,6 +35,6 @@ export const moveBelowReducer = (
             boardChanges = true
         }
 
-        if (boardChanges) return state.board = newBoard
+        if (boardChanges) state.board = newBoard
     }
 }
